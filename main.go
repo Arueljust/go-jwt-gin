@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/Arueljust/controllers"
 	"github.com/Arueljust/initializers"
 	"github.com/gin-gonic/gin"
 )
@@ -13,10 +14,7 @@ func init() {
 
 func main() {
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "zaya",
-		})
-	})
+	r.POST("/v1/signup", controllers.SignUp)
+	r.POST("/v1/login", controllers.Login)
 	r.Run()
 }

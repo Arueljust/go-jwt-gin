@@ -81,5 +81,14 @@ func Login(c *gin.Context) {
 	}
 
 	// kembalikan token
-	c.JSON(http.StatusOK, gin.H{"token": tokeString})
+	// set cookie
+	c.SetSameSite(http.SameSiteLaxMode)
+	c.SetCookie("Authorization", tokeString, 3600*24*30, "", "", false, true)
+	c.JSON(http.StatusOK, gin.H{"message": "login sukses"})
+}
+
+/*cek user login dengan validasi*/
+func Validate(c *gin.Context) {
+	user, _ := c.Get("user")
+	c.JSON(http.StatusOK, gin.H{"data": user})
 }
